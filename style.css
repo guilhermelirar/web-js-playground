@@ -20,6 +20,10 @@ body {
     color: rgb(155, 184, 158);
 }
 
+.display-enabled {
+    color: black;
+}
+
 .keyboard {
     display: grid;
     grid-template-columns: repeat(3, 60px);
