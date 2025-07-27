@@ -11,5 +11,5 @@ test("Tokenize 1+2*3 correctly", () => {
         token('number', '3')
     ];
 
-    expect(tokens).toBe(expected);
+    expect(tokens).toEqual(expected);
 })
