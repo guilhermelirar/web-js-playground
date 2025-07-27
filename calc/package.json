@@ -1,0 +1,15 @@
+{
+  "name": "calc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "evaluation.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}
