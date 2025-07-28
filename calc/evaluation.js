@@ -57,32 +57,47 @@ function tokenize(input) {
     return tokens
 }
 
-    function newParser(tokens) {
-        let current = 0;
+function newParser(tokens) {
+    let current = 0;
 
-        function consume() {
-            return tokens[current++]
-        }
-
-        function parseTerm() {
-            return {}
-        }
-
-        function parseFactor() {
-            const tc = consume();
-            if (tc.type == 'number') {
-                return {
-                    type: 'Literal',
-                    value: tc.value
-                } 
-            }
-            return {}
-        }
-
-        return {
-            parseFactor,
-            parseTerm
-        }
+    function consume() {
+        return tokens[current++]
     }
+
+    function parseTerm() {
+        let node = parseFactor();
+        let current = consume();
+
+        while(current && (current.value === '*' || current.value === '/')) {
+            const operator = current.value;
+            const right = parseFactor();
+            node = {
+                type: 'BinaryExpression',
+                operator,
+                left: node,
+                right
+            };
+            current = consume();
+        }
+
+        return node;
+    } 
+
+    function parseFactor() {
+        const tc = consume();
+        if (tc.type == 'number') {
+            return {
+                type: 'Literal',
+                value: Number(tc.value)
+            } 
+        }
+        return {}
+    }
+
+    return {
+        parseFactor,
+        parseTerm
+    }
+}
 
 module.exports = {token, tokenize, newParser}

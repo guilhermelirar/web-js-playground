@@ -25,7 +25,7 @@ test("Tokenize throw errors", () => {
 test("parseFactor parses simple factor '1' correctly", () => {
     expect(newParser([token('number', '1')]).parseFactor()).toEqual({
         type: 'Literal',
-        value: '1'
+        value: 1
     });
 })
 
