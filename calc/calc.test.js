@@ -21,3 +21,4 @@ test("Tokenize throw errors", () => {
     expect(() => tokenize(input1)).toThrow("Invalid expression");
     expect(() => tokenize(input2)).toThrow("Invalid expression");
 })
+

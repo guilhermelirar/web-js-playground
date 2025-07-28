@@ -41,6 +41,14 @@ function tokenize(input) {
                 tokens.push(token('div', '/'));
                 continue;
             }
+            case ('('): {
+                tokens.push(token('open parenthesis', '('));
+                continue;
+            }
+            case (')'): {
+                tokens.push(token('close parenthesis', ')'));
+                continue;
+            }
             default:
                 throw new Error("Invalid expression");
         }
