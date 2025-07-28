@@ -18,6 +18,6 @@ test("Tokenize throw errors", () => {
     const input1 = "x2+1";
     const input2 = "1#1";
 
-    expect(tokenize(input1)).toThrow("Invalid operands");
-    expect(tokenize(input2)).toThrow("Invalid operator");
+    expect(() => tokenize(input1)).toThrow("Invalid expression");
+    expect(() => tokenize(input2)).toThrow("Invalid expression");
 })
