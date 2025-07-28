@@ -41,6 +41,8 @@ function tokenize(input) {
                 tokens.push(token('div', '/'));
                 continue;
             }
+            default:
+                throw new Error("Invalid expression");
         }
     }
 
