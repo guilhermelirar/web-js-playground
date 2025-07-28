@@ -1,5 +1,5 @@
 // calc.test.js
-let { token, tokenize, parseFactor } = require('./evaluation')
+let { token, tokenize, newParser } = require('./evaluation')
 
 test("Tokenize 1+2*3 correctly", () => {
     const tokens = tokenize("1+2*3");
@@ -23,8 +23,8 @@ test("Tokenize throw errors", () => {
 })
 
 test("parseFactor parses simple factor '1' correctly", () => {
-    expect(parseFactor([token('number', '1')])).toEqual({
-        node: token('number', '1'),
-        rest: []
+    expect(newParser([token('number', '1')]).parseFactor()).toEqual({
+        type: 'Literal',
+        value: '1'
     });
 })
