@@ -28,3 +28,15 @@ test("parseFactor parses simple factor '1' correctly", () => {
         value: '1'
     });
 })
+
+test("parseTerm returns binary expression correctly", () => {
+    const input = [token('number', '2'), token('times', '*'), token('number', '3')];
+    const expected = {
+        type: 'BinaryExpression',
+        operator: '*',
+        left: { type: 'Literal', value: 2 },
+        right: { type: 'Literal', value: 3 }
+    }
+    
+    expect(newParser(input).parseTerm()).toEqual(expected);
+})

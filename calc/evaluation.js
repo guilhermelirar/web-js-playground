@@ -60,8 +60,16 @@ function tokenize(input) {
     function newParser(tokens) {
         let current = 0;
 
+        function consume() {
+            return tokens[current++]
+        }
+
+        function parseTerm() {
+            return {}
+        }
+
         function parseFactor() {
-            const tc = tokens[current++];
+            const tc = consume();
             if (tc.type == 'number') {
                 return {
                     type: 'Literal',
@@ -70,9 +78,10 @@ function tokenize(input) {
             }
             return {}
         }
-        
+
         return {
-            parseFactor
+            parseFactor,
+            parseTerm
         }
     }
 
