@@ -57,4 +57,11 @@ function tokenize(input) {
     return tokens
 }
 
-module.exports = {token, tokenize}
+/*
+Recebe uma string e retorna um nó da árvore (?)
+*/
+function parseFactor(factor) {
+    return factor
+} 
+
+module.exports = {token, tokenize, parseFactor}
