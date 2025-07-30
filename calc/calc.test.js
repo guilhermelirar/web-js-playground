@@ -106,9 +106,9 @@ test("two parenthesis level '1 * (2 + (3 - 4))'", () => {
 
 test("Evaluate expression returns correct results for valid inputs", ()=> {
     expect(evaluateExpression('1')).toBe(1);
-    expect(evaluateExpression('1+2')).toBe(2);
+    expect(evaluateExpression('1+2')).toBe(3);
     expect(evaluateExpression('2-2')).toBe(0);
     expect(evaluateExpression('1+2*3')).toBe(7);
     expect(evaluateExpression('(1+2)*3')).toBe(9);
-    expect(evaluateExpression('1 * (2 + (3 - 4))')).toBe(1);
+    expect(evaluateExpression('1*(2+(3-4))')).toBe(1);
 })
