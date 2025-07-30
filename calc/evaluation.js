@@ -119,6 +119,10 @@ function newParser(tokens) {
     function parseFactor() {
         const current_token = consume();
         
+        if (!current_token) {
+            invalidExpError();
+        }
+
         if (current_token.type == 'number') {
             return {
                 type: 'Literal',
@@ -169,10 +173,16 @@ function evalAST(ast) {
 
 // Receives an expression (string) and returns the result Number
 // of the evaluation of that expression. Throws Error("Invalid Expression")
-function evaluateExpression(expression) {
+function evaluateExpression (expression) {
     const tokens = tokenize(expression);
     const ast = newParser(tokens).parseExpression();
     return evalAST(ast);
 }
 
-module.exports = {token, tokenize, newParser, evaluateExpression}
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {token, tokenize, newParser, evaluateExpression};
+}
+
+if (typeof window !== "undefined") {
+    window.evaluateExpression = evaluateExpression;
+}
