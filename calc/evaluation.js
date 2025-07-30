@@ -87,7 +87,6 @@ function newParser(tokens) {
             c_token = peek();
         }
 
-        console.log(node);
         return node;
     }
 
@@ -124,7 +123,11 @@ function newParser(tokens) {
         }
 
         if (current_token.type == 'open parenthesis') {
-            return parseExpression();
+            let node = parseExpression();
+            if (consume().type != 'close parenthesis') {
+                throw new Error("Invalid Expression")
+            }
+            return node
         }
 
         return {}
