@@ -144,4 +144,35 @@ function newParser(tokens) {
     }
 }
 
-module.exports = {token, tokenize, newParser}
+// Receives an AST and returns the Number resulted in evaluation
+function evalAST(ast) {
+    if (ast.type === 'Literal') {
+        return ast.value;
+    }
+    // Recursion
+    switch (ast.operator) {
+        case ('+'): {
+            return evalAST(ast.left) + evalAST(ast.right);
+        }
+        case ('-'): {
+            return evalAST(ast.left) - evalAST(ast.right);
+        }
+        case ('*'): {
+            return evalAST(ast.left) * evalAST(ast.right);
+        }
+        case ('/'): {
+            return evalAST(ast.left) / evalAST(ast.right);
+        }
+    } 
+}
+
+
+// Receives an expression (string) and returns the result Number
+// of the evaluation of that expression. Throws Error("Invalid Expression")
+function evaluateExpression(expression) {
+    const tokens = tokenize(expression);
+    const ast = newParser(tokens).parseExpression();
+    return evalAST(ast);
+}
+
+module.exports = {token, tokenize, newParser, evaluateExpression}
