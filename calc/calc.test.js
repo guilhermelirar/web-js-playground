@@ -1,6 +1,13 @@
 // calc.test.js
 let { token, tokenize, newParser } = require('./evaluation')
 
+const expected2times3Parsed = {
+        type: 'BinaryExpression',
+        operator: '*',
+        left: { type: 'Literal', value: 2 },
+        right: { type: 'Literal', value: 3 }
+    }
+
 test("Tokenize 1+2*3 correctly", () => {
     const tokens = tokenize("1+2*3");
     const expected = [
@@ -31,12 +38,22 @@ test("parseFactor parses simple factor '1' correctly", () => {
 
 test("parseTerm returns binary expression correctly", () => {
     const input = [token('number', '2'), token('times', '*'), token('number', '3')];
-    const expected = {
-        type: 'BinaryExpression',
-        operator: '*',
-        left: { type: 'Literal', value: 2 },
-        right: { type: 'Literal', value: 3 }
-    }
+    const expected = expected2times3Parsed;
     
     expect(newParser(input).parseTerm()).toEqual(expected);
+})
+
+test("parseExpression returns expression correctly (1+2*3)", () => {
+    const input = [token('number', '1'), token('plus', '+'), 
+        token('number', '2'), token('times', '*'), token('number', '3')
+    ];
+
+    const expected = {
+        type: 'BinaryExpression',
+        operator: '+',
+        left: { type: 'Literal', value: 1},
+        right: expected2times3Parsed
+    }
+
+    expect(newParser(input).parseExpression()).toEqual(expected);
 })

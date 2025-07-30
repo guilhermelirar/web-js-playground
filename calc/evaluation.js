@@ -64,6 +64,10 @@ function newParser(tokens) {
         return tokens[current++]
     }
 
+    function parseExpression() {
+        return {};
+    }
+
     function parseTerm() {
         let node = parseFactor();
         let current = consume();
@@ -96,7 +100,8 @@ function newParser(tokens) {
 
     return {
         parseFactor,
-        parseTerm
+        parseTerm,
+        parseExpression
     }
 }
 
