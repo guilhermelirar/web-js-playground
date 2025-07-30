@@ -2,6 +2,10 @@ function token(type, value) {
     return {type, value}
 }
 
+function invalidExpError() {
+    throw new Error("Invalid Expression");
+}
+
 // Returns a list of tokens from an input
 // Ex: [{ type:'number', value:'1' }, 
 //      {type:'plus', value:'+'},
@@ -50,7 +54,7 @@ function tokenize(input) {
                 continue;
             }
             default:
-                throw new Error("Invalid expression");
+                return invalidExpError();
         }
     }
 
@@ -125,12 +129,12 @@ function newParser(tokens) {
         if (current_token.type == 'open parenthesis') {
             let node = parseExpression();
             if (consume().type != 'close parenthesis') {
-                throw new Error("Invalid Expression")
+                invalidExpError();
             }
             return node
         }
 
-        return {}
+        return invalidExpError();
     }
 
     return {
