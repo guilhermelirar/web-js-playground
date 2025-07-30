@@ -57,3 +57,25 @@ test("parseExpression returns expression correctly (1+2*3)", () => {
 
     expect(newParser(input).parseExpression()).toEqual(expected);
 })
+
+test("parseExpression handles parenthesis correctly 1*(2+3)", () => {
+    const input = [token('number', '1'), token('times', '*'), 
+                   token('open parenthesis', '('),
+                   token('number', '2'), token('plus', '+'), 
+                   token('number', '3'), token('close parenthesis', ')')
+    ];
+
+    const expected = {
+        type: 'BinaryExpression',
+        operator: '*',
+        left: { type: 'Literal', value: 1},
+        right: {
+        type: 'BinaryExpression',
+            operator: '+',
+            left: { type: 'Literal', value: 2 },
+            right: { type: 'Literal', value: 3 }
+        }
+    }
+    
+    expect(newParser(input).parseExpression()).toEqual(expected);
+})

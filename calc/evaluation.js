@@ -123,6 +123,10 @@ function newParser(tokens) {
             } 
         }
 
+        if (current_token.type == 'open parenthesis') {
+            return parseExpression();
+        }
+
         return {}
     }
 
