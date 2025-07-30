@@ -60,41 +60,69 @@ function tokenize(input) {
 function newParser(tokens) {
     let current = 0;
 
+    function peek() {
+        return tokens[current];
+    }
+
     function consume() {
-        return tokens[current++]
+        return tokens[current++];
     }
 
     function parseExpression() {
-        return {};
-    }
+        let node = parseTerm();
+        let c_token = peek();
 
-    function parseTerm() {
-        let node = parseFactor();
-        let current = consume();
+        while(c_token && (c_token.value === '+' || c_token.value === '-')) {
+            const operator = c_token.value;
+            consume();
+            const right = parseTerm();
 
-        while(current && (current.value === '*' || current.value === '/')) {
-            const operator = current.value;
-            const right = parseFactor();
             node = {
                 type: 'BinaryExpression',
                 operator,
                 left: node,
                 right
             };
-            current = consume();
+
+            c_token = peek();
         }
 
+        console.log(node);
+        return node;
+    }
+
+    function parseTerm() {
+        let node = parseFactor();
+        let c_token = peek();
+
+        while(c_token && (c_token.value === '*' || c_token.value === '/')) {
+            const operator = c_token.value;
+            consume();
+            const right = parseFactor();
+
+            node = {
+                type: 'BinaryExpression',
+                operator,
+                left: node,
+                right
+            };
+
+            c_token = peek();
+        }
+        
         return node;
     } 
 
     function parseFactor() {
-        const tc = consume();
-        if (tc.type == 'number') {
+        const current_token = consume();
+        
+        if (current_token.type == 'number') {
             return {
                 type: 'Literal',
-                value: Number(tc.value)
+                value: Number(current_token.value)
             } 
         }
+
         return {}
     }
 
