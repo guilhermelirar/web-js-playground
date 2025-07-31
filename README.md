@@ -4,7 +4,7 @@
 
 Repositório com pequenos projetos simples em JavaScript, HTML e CSS, focado principalmente em sites estáticos (sem backend) ou que consomem APIs básicas. Criado para aprendizado prático e experimentação.
 
-## 1. Calculadora
+## 1. [Calculadora](https://guilhermelirar.github.io/web-js-playground/calc/index.html)
 
 Projeto de calculadora simples feita com HTML, CSS e JavaScript.
 Suporta operações básicas: soma, subtração, multiplicação e divisão, além de expressões com parênteses.
