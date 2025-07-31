@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
     background-color:rgb(255, 255, 255);
     display: flex;
@@ -7,9 +12,19 @@ body {
 }
 
 .calculator {
+    display: grid;
+    grid-template-rows: 0fr 1fr 4fr;
     background-color: #dde4ec;
     border-radius: 15px;
     padding: 10px;
+    width: 90%;
+    height: 90%;
+}
+
+@media (min-width: 1000px) {
+  .calculator {
+    width: 50%;
+  }
 }
 
 .display-div {
@@ -28,15 +43,17 @@ body {
 
 .keyboard {
     display: grid;
-    grid-template-columns: repeat(5, 60px);
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
     gap: 5px;
     justify-content: center;
     margin: 10px auto;
+    flex: 1;
 }
 
 .calculator-button {
     padding: 15px;
-    font-size: 18px;
+    font-size: min(5vw, 5vh);
     border: none;
     background-color: #afb7ce;
     color: #ffffff;
