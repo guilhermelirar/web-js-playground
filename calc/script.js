@@ -18,9 +18,9 @@ function input(c) {
 function equal() {
     try {
         const ans = evaluateExpression(disp.textContent);
-        disp.textContent = ans;
+        disp.textContent = parseFloat(ans.toFixed(6)).toString();;
     } catch (e) {
-        disp.textContent = e;
+        disp.textContent = "ERROR";
     }
 }
 

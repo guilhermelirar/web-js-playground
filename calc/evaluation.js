@@ -165,7 +165,13 @@ function evalAST(ast) {
             return evalAST(ast.left) * evalAST(ast.right);
         }
         case ('/'): {
-            return evalAST(ast.left) / evalAST(ast.right);
+            let right = evalAST(ast.right);
+            
+            if (right == 0) {
+                throw new Error("DIVISION BY ZERO");
+            }
+
+            return evalAST(ast.left) / right;
         }
     } 
 }
