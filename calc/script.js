@@ -12,6 +12,10 @@ function input(c) {
         disp.textContent = "";
     }
 
+    if (disp.textContent === "ERROR") {
+        disp.textContent = "";
+    }
+
     disp.textContent += c
 }
 
